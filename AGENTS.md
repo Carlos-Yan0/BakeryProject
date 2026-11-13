@@ -1,47 +1,23 @@
-<laravel-boost-guidelines>
-# Laravel Application
+## Escopo de trabalho dos agentes: frontend
 
-This repository contains a Laravel application. Complete the following setup before working on the user's request.
+os agentes devem atuar exclusivamente no frontend.
 
-## Prerequisites
+### Limites
 
-Verify that PHP and Composer are available:
+- Podem ler o backend para entender rotas, controladores, validações, dados enviados às views e contratos de formulários.
+- Podem editar somente views Blade e arquivos de frontend necessários, como estilos, JavaScript e assets, respeitando a estrutura existente do projeto.
+- Não podem editar rotas, controladores, middleware, models, migrations, banco de dados, autenticação, serviços, APIs, configurações ou dependências do backend.
+- Não devem inventar rotas, nomes de campos, métodos HTTP, validações ou comportamentos. Usem o backend existente como fonte de verdade.
+- Se uma necessidade visual depender de uma mudança no backend, não a implementem no backend. Relatem a limitação e implementem apenas o que for possível dentro do contrato atual.
+- Não adicionem dependências nem refatoremos código fora do escopo da tarefa.
 
-```sh
-php -v
-composer -V
-```
+### Orientações de implementação
 
-If either command is unavailable, detect the user's operating system and install the prerequisites with the appropriate command:
+- Criem interfaces responsivas para celular, tablet e desktop.
+- Mantenham uma identidade visual clara, acolhedora e apropriada para uma padaria, usando cores claras e tons quentes com bom contraste.
+- Reutilizem layouts e componentes existentes quando apropriado.
+- Nos formulários Blade, preservem os contratos do backend e usem corretamente proteção CSRF, valores previamente preenchidos e mensagens de validação.
+- Sigam boas práticas de acessibilidade: HTML semântico, rótulos associados aos campos, foco visível e navegação por teclado.
+- Não simulem dados, preços ou funcionalidades que o projeto não fornece.
 
-macOS:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.5)"
-```
-
-Windows PowerShell:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.5'))
-```
-
-Linux:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.5)"
-```
-
-After installation, ask the user to restart their terminal. If the agent needs the restarted shell to continue, ask the user to reopen their terminal and rerun their original prompt.
-
-## Agent Setup
-
-Install Laravel Boost from the application root before making application changes:
-
-```sh
-composer require laravel/boost --dev
-php artisan boost:install
-```
-
-Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
-</laravel-boost-guidelines>
+Ao concluir, revisem o diff e resumam os arquivos de frontend alterados e qualquer limitação encontrada.
