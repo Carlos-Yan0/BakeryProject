@@ -3,6 +3,8 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 
 //Product Routes
 Route::get('/products', [ProductController::class, 'index'])
@@ -31,9 +33,6 @@ Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])
 
 Route::put('/categories/{id}', [CategoryController::class, 'update'])
 ->name('categories.update');
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 #temp route to obtain the csrf token
 if(app()->islocal()){
