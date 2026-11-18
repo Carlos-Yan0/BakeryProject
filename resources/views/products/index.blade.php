@@ -1,13 +1,8 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f7f1e7">
-    <title>Produtos | Padaria</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="min-h-screen bg-[#f7f1e7] text-[#38291f] antialiased">
+@extends('layouts.app')
+
+@section('title', 'Produtos | Padaria')
+
+@section('content')
     @php
         $categoryById = $categories->keyBy('id');
         $activeProductCount = $products->filter(fn ($product) => (bool) $product->active)->count();
@@ -19,23 +14,7 @@
         };
     @endphp
 
-    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
-    <header class="border-b border-[#e8ddce] bg-[#fffdf9]">
-        <div class="mx-auto flex min-h-[76px] w-full max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
-            <a href="{{ route('products.index') }}" class="inline-flex items-center gap-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#98633e]" aria-label="Início do gerenciamento de produtos">
-                <span class="grid size-11 place-items-center rounded-2xl bg-[#563d2e] text-[#f7f1e7]" aria-hidden="true">
-                    <svg viewBox="0 0 48 48" fill="none" class="size-8"><path d="M9 25.5c0-8.3 6.7-15 15-15s15 6.7 15 15v9.2c0 1.8-1.5 3.3-3.3 3.3H12.3A3.3 3.3 0 0 1 9 34.7v-9.2Z" fill="currentColor"/><path d="M18 19.5c-1.5 2.1-2.2 4.3-2.2 6.8M25.2 16.8c-1.1 2.3-1.6 4.7-1.4 7.2M32.1 19.5c-1.2 2.1-1.7 4.3-1.5 6.7" stroke="#F7F1E7" stroke-linecap="round" stroke-width="2.2"/></svg>
-                </span>
-                <span><span class="block font-serif text-xl font-semibold tracking-tight">Padaria</span><span class="mt-0.5 block text-[10px] font-semibold uppercase tracking-[.18em] text-[#897765]">Gestão do catálogo</span></span>
-            </a>
-            <nav class="flex items-center gap-1 rounded-full border border-[#e8ddce] bg-[#f8f3eb] p-1 text-xs font-semibold" aria-label="Navegação do catálogo">
-                <a href="{{ route('products.index') }}" aria-current="page" class="rounded-full bg-[#563d2e] px-3 py-2 text-white">Produtos</a>
-                <a href="{{ route('categories.index') }}" class="rounded-full px-3 py-2 text-[#715d4b] transition hover:bg-white hover:text-[#38291f]">Categorias</a>
-            </nav>
-        </div>
-    </header>
-
-    <main id="main-content" class="mx-auto w-full max-w-7xl px-5 pb-12 pt-8 sm:px-8 sm:pt-11">
+    <div class="mx-auto w-full max-w-7xl px-5 pb-12 pt-8 sm:px-8 sm:pt-11">
         <section class="mb-8 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
                 <p class="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-[#8b725c]"><span class="h-px w-7 bg-[#b98457]" aria-hidden="true"></span>Catálogo</p>
@@ -107,7 +86,7 @@
             </div>
         </section>
         <p class="mt-5 text-center text-xs text-[#978775]">Os dados e as ações desta tela usam o catálogo já cadastrado.</p>
-    </main>
+    </div>
 
     <dialog id="product-dialog" class="app-dialog" aria-labelledby="product-dialog-title" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}">
         <div class="flex max-h-[90dvh] flex-col">
@@ -135,5 +114,4 @@
             <form id="delete-form" action="#" method="POST" class="mt-7 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end" data-delete-url-template="{{ route('products.delete', ['id' => '__PRODUCT_ID__']) }}">@csrf @method('DELETE')<button type="button" class="inline-flex min-h-11 items-center justify-center rounded-full border border-[#dfd2c1] px-5 text-sm font-semibold text-[#665545] hover:bg-[#f8f3eb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#98633e]" data-close-dialog>Cancelar</button><button type="submit" disabled class="inline-flex min-h-11 items-center justify-center rounded-full bg-[#9b4c3d] px-5 text-sm font-semibold text-white hover:bg-[#843a2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#843a2e] disabled:cursor-not-allowed disabled:opacity-50">Excluir produto</button></form>
         </div>
     </dialog>
-</body>
-</html>
+@endsection

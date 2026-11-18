@@ -4,6 +4,22 @@ const productDialog = document.querySelector('#product-dialog');
 const productForm = document.querySelector('#product-form');
 const deleteDialog = document.querySelector('#delete-dialog');
 const deleteForm = document.querySelector('#delete-form');
+const mobileSidebar = document.querySelector('#mobile-sidebar');
+const mobileMenuToggle = document.querySelector('[data-open-mobile-sidebar]');
+
+mobileMenuToggle?.addEventListener('click', () => {
+    if (!mobileSidebar || mobileSidebar.open) return;
+
+    mobileSidebar.showModal();
+    mobileMenuToggle.setAttribute('aria-expanded', 'true');
+    mobileMenuToggle.setAttribute('aria-label', 'Fechar navegação');
+    requestAnimationFrame(() => mobileSidebar.querySelector('[data-close-dialog]')?.focus());
+});
+
+mobileSidebar?.addEventListener('close', () => {
+    mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+    mobileMenuToggle?.setAttribute('aria-label', 'Abrir navegação');
+});
 
 function safeSessionStorage(value) {
     try {
