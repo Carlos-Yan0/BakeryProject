@@ -6,34 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
-//Product Routes
-Route::get('/products', [ProductController::class, 'index'])
-->name('products.index');
-
-Route::post('/products', [ProductController::class, 'store'])
-->name('products.store');
-
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])
-->name('products.delete');
-
-
-Route::put('/products/{id}', [ProductController::class, 'update'])
-->name('products.update');
-
-//Category Routes
-
-Route::get('/categories', [CategoryController::class, 'index'])
-->name('categories.index');
-
-Route::post('/categories', [CategoryController::class, 'store'])
-->name('categories.store');
-
-Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])
-->name('categories.delete');
-
-Route::put('/categories/{id}', [CategoryController::class, 'update'])
-->name('categories.update');
-
 #temp route to obtain the csrf token
 if(app()->islocal()){
     Route::get('/dev/csrf-token', function (Request $request){
@@ -65,3 +37,40 @@ Route::post('/logout', [UserController::class, 'logout'])
 Route::view('/home', 'home')
 ->middleware('auth')
 ->name('home');
+
+
+//Product Routes
+Route::get('/products', [ProductController::class, 'index'])
+->middleware('auth')
+->name('products.index');
+
+Route::post('/products', [ProductController::class, 'store'])
+->middleware('auth')
+->name('products.store');
+
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])
+->middleware('auth')
+->name('products.delete');
+
+
+Route::put('/products/{id}', [ProductController::class, 'update'])
+->middleware('auth')
+->name('products.update');
+
+//Category Routes
+
+Route::get('/categories', [CategoryController::class, 'index'])
+->middleware('auth')
+->name('categories.index');
+
+Route::post('/categories', [CategoryController::class, 'store'])
+->middleware('auth')
+->name('categories.store');
+
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])
+->middleware('auth')
+->name('categories.delete');
+
+Route::put('/categories/{id}', [CategoryController::class, 'update'])
+->middleware('auth')
+->name('categories.update');
