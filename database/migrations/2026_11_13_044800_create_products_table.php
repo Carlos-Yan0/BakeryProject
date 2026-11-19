@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('product_code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedInteger('stock')->default(0);
+            $table->decimal('stock', 11, 3)->default(0);
             $table->decimal('price', 10, 2);
             $table->boolean('active')->default(true);
 
